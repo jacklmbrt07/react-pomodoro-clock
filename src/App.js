@@ -42,7 +42,7 @@ function App() {
         decBreakLength={decBreakLength}
         incBreakLength={incBreakLength}
       />
-      <TimeLeft sessionLength={sessionLength} />
+      <TimeLeft sessionLength={sessionLength} breakLength={breakLength} />
       <Session
         sessionLength={sessionLength}
         decSessionLength={decSessionLength}
