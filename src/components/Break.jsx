@@ -1,7 +1,7 @@
 import moment from "moment";
 
 const Break = ({ breakLength, decBreakLength, incBreakLength }) => {
-  const breakLengthInMinutes = moment.duration(breakLength, "s").minutes();
+  const breakLengthInMinutes = moment.duration(breakLength, "s").asMinutes();
   return (
     <div>
       <p id="break-label">Break</p>
