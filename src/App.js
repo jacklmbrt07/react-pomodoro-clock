@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Break from "./components/Break";
 import Session from "./components/Session";
@@ -7,8 +7,16 @@ import TimeLeft from "./components/TimeLeft";
 import "./App.css";
 
 function App() {
+  const audioElement = useRef(null);
   const [breakLength, setBreakLength] = useState(300);
   const [sessionLength, setSessionLength] = useState(60 * 25);
+  const [currentSessionType, setCurrentSessionType] = useState("Session");
+  const [intervalId, setIntervalId] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(sessionLength);
+
+  useEffect(() => {
+    setTimeLeft(sessionLength);
+  }, [sessionLength]);
 
   const decBreakLength = () => {
     const newBreakLength = breakLength - 60;
@@ -35,6 +43,43 @@ function App() {
   const incSessionLength = () => {
     setSessionLength(sessionLength + 60);
   };
+
+  const isStarted = intervalId != null;
+  const handleStartStopClick = () => {
+    if (isStarted) {
+      clearInterval(intervalId);
+      setIntervalId(null);
+    } else {
+      const newIntervalId = setInterval(() => {
+        setTimeLeft((prevTimeLeft) => {
+          const newTimeLeft = prevTimeLeft - 1;
+          if (newTimeLeft >= 0) {
+            return prevTimeLeft - 1;
+          }
+          audioElement.current.play();
+          if (currentSessionType === "Session") {
+            setCurrentSessionType("Break");
+            setTimeLeft(breakLength);
+          } else if (currentSessionType === "Break") {
+            setCurrentSessionType("Session");
+            setTimeLeft(sessionLength);
+          }
+        });
+      }, 100); // TODO: TURN BACK INTO 1000
+      setIntervalId(newIntervalId);
+    }
+  };
+
+  const handleResetButtonClick = () => {
+    audioElement.current.load();
+    clearInterval(intervalId);
+    setIntervalId(null);
+    setCurrentSessionType("Session");
+    setSessionLength(60 * 25);
+    setBreakLength(60 * 5);
+    setTimeLeft(60 * 25);
+  };
+
   return (
     <div className="App">
       <Break
@@ -42,12 +87,26 @@ function App() {
         decBreakLength={decBreakLength}
         incBreakLength={incBreakLength}
       />
-      <TimeLeft sessionLength={sessionLength} breakLength={breakLength} />
+      <TimeLeft
+        startStopButtonLabel={isStarted ? "Stop" : "Start"}
+        handleStartStopClick={handleStartStopClick}
+        timerLabel={currentSessionType}
+        timeLeft={timeLeft}
+      />
       <Session
         sessionLength={sessionLength}
         decSessionLength={decSessionLength}
         incSessionLength={incSessionLength}
       />
+      <button id="reset" onClick={handleResetButtonClick}>
+        Reset
+      </button>
+      <audio id="beep" ref={audioElement}>
+        <source
+          src="https://onlineclock.net/audio/options/default.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
     </div>
   );
 }
