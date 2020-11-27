@@ -19,6 +19,19 @@ function App() {
     setTimeLeft(sessionLength);
   }, [sessionLength]);
 
+  useEffect(() => {
+    if (timeLeft === 0) {
+      audioElement.current.play();
+      if (currentSessionType === "Session") {
+        setCurrentSessionType("Break");
+        setTimeLeft(breakLength);
+      } else if (currentSessionType === "Break") {
+        setCurrentSessionType("Session");
+        setTimeLeft(sessionLength);
+      }
+    }
+  }, [breakLength, currentSessionType, sessionLength, timeLeft]);
+
   const decBreakLength = () => {
     const newBreakLength = breakLength - 60;
     if (newBreakLength > 0) {
@@ -54,20 +67,7 @@ function App() {
       setIntervalId(null);
     } else {
       const newIntervalId = setInterval(() => {
-        setTimeLeft((prevTimeLeft) => {
-          const newTimeLeft = prevTimeLeft - 1;
-          if (newTimeLeft >= 0) {
-            return newTimeLeft;
-          }
-          audioElement.current.play();
-          if (currentSessionType === "Session") {
-            setCurrentSessionType("Break");
-            return breakLength;
-          } else if (currentSessionType === "Break") {
-            setCurrentSessionType("Session");
-            return sessionLength;
-          }
-        });
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
       }, 100); // TODO: TURN BACK INTO 1000
       setIntervalId(newIntervalId);
     }
