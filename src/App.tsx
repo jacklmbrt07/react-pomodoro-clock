@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect, useRef } from "react";
 
 import Break from "./components/Break";
@@ -8,11 +9,11 @@ import "./App.css";
 import "./assets/main.css";
 
 function App() {
-  const audioElement = useRef(null);
+  const audioElement = useRef<HTMLAudioElement>(null);
   const [breakLength, setBreakLength] = useState(300);
   const [sessionLength, setSessionLength] = useState(60 * 25);
   const [currentSessionType, setCurrentSessionType] = useState("Session");
-  const [intervalId, setIntervalId] = useState(null);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [timeLeft, setTimeLeft] = useState(sessionLength);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ function App() {
 
   useEffect(() => {
     if (timeLeft === 0) {
-      audioElement.current.play();
+      audioElement?.current?.play();
       if (currentSessionType === "Session") {
         setCurrentSessionType("Break");
         setTimeLeft(breakLength);
@@ -63,7 +64,7 @@ function App() {
   const isStarted = intervalId != null;
   const handleStartStopClick = () => {
     if (isStarted) {
-      clearInterval(intervalId);
+      if (intervalId) clearInterval(intervalId);
       setIntervalId(null);
     } else {
       const newIntervalId = setInterval(() => {
@@ -74,8 +75,8 @@ function App() {
   };
 
   const handleResetButtonClick = () => {
-    audioElement.current.load();
-    clearInterval(intervalId);
+    audioElement?.current?.load();
+    if (intervalId) clearInterval(intervalId);
     setIntervalId(null);
     setCurrentSessionType("Session");
     setSessionLength(60 * 25);

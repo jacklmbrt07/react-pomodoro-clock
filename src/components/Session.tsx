@@ -1,4 +1,5 @@
 import moment from "moment";
+import React from "react";
 import {
   BreakSessionContainer,
   BreakSessionLabel,
@@ -7,7 +8,11 @@ import {
   PlusMinusButtonContainer,
 } from "../ui/BreakSessionUi";
 
-const Session = ({ sessionLength, decSessionLength, incSessionLength }) => {
+const Session: React.FC<Props> = ({
+  sessionLength,
+  decSessionLength,
+  incSessionLength,
+}) => {
   const sessionLengthInMinutes = moment.duration(sessionLength, "s").minutes();
   return (
     <BreakSessionContainer>
@@ -25,6 +30,12 @@ const Session = ({ sessionLength, decSessionLength, incSessionLength }) => {
       </PlusMinusButtonContainer>
     </BreakSessionContainer>
   );
+};
+
+type Props = {
+  sessionLength: number;
+  decSessionLength: () => void;
+  incSessionLength: () => void;
 };
 
 export default Session;
