@@ -69,7 +69,7 @@ function App() {
     } else {
       const newIntervalId = setInterval(() => {
         setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-      }, 100); // TODO: TURN BACK INTO 1000
+      }, 1000); 
       setIntervalId(newIntervalId);
     }
   };
