@@ -1,4 +1,5 @@
 {
+  "homepage": "http://jacklmbrt07.github.io/react-pomodoro-clock",
   "name": "react-pomodoro-clock",
   "version": "0.1.0",
   "private": true,
@@ -24,6 +25,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "npm run watch:css && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -49,6 +52,7 @@
     ]
   },
   "devDependencies": {
-    "@types/moment-duration-format": "^2.2.2"
+    "@types/moment-duration-format": "^2.2.2",
+    "gh-pages": "^3.1.0"
   }
 }
