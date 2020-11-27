@@ -11195,6 +11195,10 @@ video {
   clear: none;
 }
 
+.font-clock {
+  font-family: "Comfortaa";
+}
+
 .font-sans {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -39788,6 +39792,10 @@ video {
     clear: none;
   }
 
+  .sm\:font-clock {
+    font-family: "Comfortaa";
+  }
+
   .sm\:font-sans {
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
@@ -68336,6 +68344,10 @@ video {
 
   .md\:clear-none {
     clear: none;
+  }
+
+  .md\:font-clock {
+    font-family: "Comfortaa";
   }
 
   .md\:font-sans {
@@ -96888,6 +96900,10 @@ video {
     clear: none;
   }
 
+  .lg\:font-clock {
+    font-family: "Comfortaa";
+  }
+
   .lg\:font-sans {
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
@@ -125438,6 +125454,10 @@ video {
     clear: none;
   }
 
+  .xl\:font-clock {
+    font-family: "Comfortaa";
+  }
+
   .xl\:font-sans {
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
@@ -153986,6 +154006,10 @@ video {
 
   .\32xl\:clear-none {
     clear: none;
+  }
+
+  .\32xl\:font-clock {
+    font-family: "Comfortaa";
   }
 
   .\32xl\:font-sans {

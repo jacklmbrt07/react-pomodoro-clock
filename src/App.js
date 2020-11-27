@@ -5,6 +5,7 @@ import Session from "./components/Session";
 import TimeLeft from "./components/TimeLeft";
 
 import "./App.css";
+import "./assets/main.css";
 
 function App() {
   const audioElement = useRef(null);
@@ -83,26 +84,27 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Break
-        breakLength={breakLength}
-        decBreakLength={decBreakLength}
-        incBreakLength={incBreakLength}
-      />
-      <TimeLeft
-        startStopButtonLabel={isStarted ? "Stop" : "Start"}
-        handleStartStopClick={handleStartStopClick}
-        timerLabel={currentSessionType}
-        timeLeft={timeLeft}
-      />
-      <Session
-        sessionLength={sessionLength}
-        decSessionLength={decSessionLength}
-        incSessionLength={incSessionLength}
-      />
-      <button id="reset" onClick={handleResetButtonClick}>
-        Reset
-      </button>
+    <div className="App flex flex-col h-screen items-center justify-center bg-gradient-to-t from-red-600 to-yellow-300">
+      <div className="flex w-full justify-around">
+        <Break
+          breakLength={breakLength}
+          decBreakLength={decBreakLength}
+          incBreakLength={incBreakLength}
+        />
+        <TimeLeft
+          handleResetButtonClick={handleResetButtonClick}
+          startStopButtonLabel={isStarted ? "Stop" : "Start"}
+          handleStartStopClick={handleStartStopClick}
+          timerLabel={currentSessionType}
+          timeLeft={timeLeft}
+        />
+        <Session
+          sessionLength={sessionLength}
+          decSessionLength={decSessionLength}
+          incSessionLength={incSessionLength}
+        />
+      </div>
+
       <audio id="beep" ref={audioElement}>
         <source
           src="https://onlineclock.net/audio/options/default.mp3"
